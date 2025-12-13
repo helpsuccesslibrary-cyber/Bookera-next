@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
-import { LOCATIONS, PAYMENT_DETAILS, SHIPPING_COST, FREE_SHIPPING_THRESHOLD } from '../constants';
+import { LOCATIONS, SHIPPING_COST, FREE_SHIPPING_THRESHOLD } from '../constants';
 import { CheckoutDetails, Province } from '../types';
 
 const Checkout: React.FC = () => {
@@ -109,34 +108,16 @@ const Checkout: React.FC = () => {
             <form onSubmit={handleFinalSubmit} className="space-y-6">
               <h2 className="text-3xl font-serif font-bold dark:text-white mb-6">Payment Method</h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                {['cod', 'easypaisa'].map((method) => (
+              <div className="grid grid-cols-1 gap-4 mb-8">
                   <div 
-                    key={method} 
-                    onClick={() => setDetails(prev => ({ ...prev, paymentMethod: method as any }))}
-                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${details.paymentMethod === method ? 'border-gold-500 bg-gold-50 dark:bg-slate-800' : 'border-gray-200 dark:border-slate-700'}`}
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all border-gold-500 bg-gold-50 dark:bg-slate-800`}
                   >
-                    <span className="font-bold capitalize dark:text-white">{method.replace('_', ' ')}</span>
+                    <span className="font-bold capitalize dark:text-white">Cash On Delivery</span>
                   </div>
-                ))}
               </div>
 
               <div className="bg-gray-50 dark:bg-slate-800 p-6 rounded-xl mb-6">
-                {details.paymentMethod === 'cod' && (
                   <p className="text-orange-600 font-medium">Please ensure you have Rs. {total.toLocaleString()} cash ready upon delivery.</p>
-                )}
-                
-                {details.paymentMethod === 'easypaisa' && (
-                  <div>
-                    <h4 className="font-bold text-lg mb-2 dark:text-white">EasyPaisa Details</h4>
-                    <p className="dark:text-slate-300">Account: {PAYMENT_DETAILS.easypaisa.number}</p>
-                    <p className="dark:text-slate-300 mb-4">Title: {PAYMENT_DETAILS.easypaisa.name}</p>
-                    <label className="flex items-center gap-2 p-3 border border-dashed border-slate-400 rounded-lg cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                      <Upload size={20} /> <span className="text-sm">Upload Screenshot</span>
-                      <input type="file" className="hidden" accept="image/*" />
-                    </label>
-                  </div>
-                )}
               </div>
 
               <div className="border-t border-gray-200 dark:border-slate-700 pt-6">

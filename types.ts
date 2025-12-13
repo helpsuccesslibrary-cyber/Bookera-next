@@ -38,5 +38,5 @@ export interface CheckoutDetails {
   address: string;
   province: string;
   city: string;
-  paymentMethod: 'cod' | 'easypaisa';
+  paymentMethod: 'cod';
 }

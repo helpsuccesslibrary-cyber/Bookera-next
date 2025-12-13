@@ -114,10 +114,6 @@ export const MOCK_REVIEWS: Review[] = [
   { id: '2', user: 'Sara Ahmed', rating: 4, comment: 'Great insights but a bit lengthy.', date: '2023-11-05' },
 ];
 
-export const PAYMENT_DETAILS = {
-  easypaisa: { title: 'EasyPaisa', number: '0300-1234567', name: 'Bookera Payments' }
-};
-
 export const SHIPPING_COST = 250;
 export const FREE_SHIPPING_THRESHOLD = 5000;
 export const VALID_PROMO = { code: 'WAQAS10', discount: 0.10 };
