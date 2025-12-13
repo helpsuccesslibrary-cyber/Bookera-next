@@ -1,4 +1,4 @@
-import { Book, Province, Review } from './types';
+import { Book, Review } from './types';
 
 export const BOOKS: Book[] = [
   {
@@ -71,43 +71,6 @@ export const BOOKS: Book[] = [
     reviews: 900,
   }
 ];
-
-export const LOCATIONS: Record<Province, string[]> = {
-  'KPK': [
-    'Abbottabad',
-    'Bannu',
-    'Barikot',
-    'Batkhela',
-    'Battagram',
-    'Charsadda',
-    'Chitral',
-    'Dera Ismail Khan (D.I. Khan)',
-    'Dir',
-    'Hangu',
-    'Haripur',
-    'Havelian',
-    'Kabal',
-    'Karak',
-    'Khwazakhela',
-    'Kohat',
-    'Lakki Marwat',
-    'Mansehra',
-    'Mardan',
-    'Mingora',
-    'Nowshera',
-    'Pabbi',
-    'Paharpur',
-    'Peshawar',
-    'Shabqadar',
-    'Swabi',
-    'Takht-i-Bahi',
-    'Tank',
-    'Tangi',
-    'Timargara',
-    'Topi',
-    'Tordher'
-  ]
-};
 
 export const MOCK_REVIEWS: Review[] = [
   { id: '1', user: 'Ali Khan', rating: 5, comment: 'Life changing book!', date: '2023-10-12' },

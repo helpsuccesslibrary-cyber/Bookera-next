@@ -30,8 +30,6 @@ export interface Review {
   date: string;
 }
 
-export type Province = 'KPK';
-
 export interface CheckoutDetails {
   paymentMethod: 'cod';
 }

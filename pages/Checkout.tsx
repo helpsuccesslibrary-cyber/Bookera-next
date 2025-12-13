@@ -14,6 +14,11 @@ const Checkout: React.FC = () => {
     const loadTally = () => {
       if ((window as any).Tally) {
         (window as any).Tally.loadEmbeds();
+      } else {
+        // Fallback: manually set src if Tally global isn't available yet
+        document.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((e: any) => {
+          e.src = e.dataset.tallySrc;
+        });
       }
     };
 
@@ -25,9 +30,28 @@ const Checkout: React.FC = () => {
       script.onerror = loadTally;
       document.body.appendChild(script);
     } else {
+      // If script exists, try to load embeds immediately
       loadTally();
     }
   }, []);
+
+  // Listen for Tally Form Submission
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      // Check for Tally submission event (supports string or object payloads)
+      const isTallySubmit = 
+        e.data === 'Tally.FormSubmitted' || 
+        (typeof e.data === 'string' && e.data.includes('Tally.FormSubmitted')) ||
+        (typeof e.data === 'object' && e.data?.event === 'Tally.FormSubmitted');
+
+      if (isTallySubmit) {
+        navigate('/payment');
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [navigate]);
 
   if (cart.length === 0) {
       // Redirect if cart is empty, use setTimeout to avoid render loop issues
@@ -61,7 +85,7 @@ const Checkout: React.FC = () => {
                 <iframe 
                   data-tally-src="https://tally.so/r/dWEo9o?transparentBackground=1&dynamicHeight=1" 
                   width="100%" 
-                  height="700" 
+                  height="1000" 
                   frameBorder="0" 
                   marginHeight={0} 
                   marginWidth={0} 
@@ -69,17 +93,6 @@ const Checkout: React.FC = () => {
                   className="bg-transparent"
                 ></iframe>
               </div>
-
-              <div className="bg-blue-50 dark:bg-slate-800 p-4 rounded-xl text-sm text-slate-600 dark:text-slate-300 border border-blue-100 dark:border-slate-700">
-                <p>Please fill out the form above accurately. Once submitted, click the button below to proceed to payment.</p>
-              </div>
-
-              <button 
-                onClick={() => navigate('/payment')} 
-                className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all hover:shadow-lg transform hover:-translate-y-1"
-              >
-                I have submitted my details, Continue
-              </button>
             </div>
         </div>
       </div>
