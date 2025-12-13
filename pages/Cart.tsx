@@ -5,10 +5,9 @@ import { useStore } from '../context/StoreContext';
 import { VALID_PROMO } from '../constants';
 
 const Cart: React.FC = () => {
-  const { cart, removeFromCart, updateQuantity, cartTotal, showToast } = useStore();
+  const { cart, removeFromCart, updateQuantity, cartTotal, showToast, discount, setDiscount } = useStore();
   const navigate = useNavigate();
   const [promoCode, setPromoCode] = useState('');
-  const [discount, setDiscount] = useState(0);
 
   const handleApplyPromo = () => {
     if (promoCode.toUpperCase() === VALID_PROMO.code) {
@@ -78,7 +77,7 @@ const Cart: React.FC = () => {
                   placeholder="Enter code" 
                   className="flex-1 bg-gray-50 dark:bg-slate-800 border-none rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-gold-500"
                 />
-                <button onClick={handleApplyPromo} className="bg-slate-900 dark:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Apply</button>
+                <button onClick={handleApplyPromo} className="bg-slate-900 dark:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">Apply</button>
               </div>
               {discount > 0 && <p className="text-xs text-green-500 mt-2">Discount applied!</p>}
             </div>
@@ -100,7 +99,7 @@ const Cart: React.FC = () => {
 
             <button 
               onClick={() => navigate('/checkout')}
-              className="w-full mt-8 bg-gold-500 text-white py-4 rounded-xl font-bold hover:bg-gold-600 transition-colors flex justify-center items-center gap-2"
+              className="w-full mt-8 bg-gold-500 text-white py-4 rounded-xl font-bold hover:bg-gold-600 transition-colors flex justify-center items-center gap-2 shadow-lg shadow-gold-500/20"
             >
               Checkout <ArrowRight size={20} />
             </button>

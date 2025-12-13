@@ -13,6 +13,8 @@ interface StoreContextType {
   isInWishlist: (id: string) => boolean;
   clearCart: () => void;
   cartTotal: number;
+  discount: number;
+  setDiscount: (discount: number) => void;
   toastMessage: string | null;
   showToast: (msg: string) => void;
 }
@@ -23,6 +25,7 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<Book[]>([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [discount, setDiscount] = useState(0);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -77,7 +80,10 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     }));
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    setDiscount(0);
+  };
 
   const addToWishlist = (book: Book) => {
     setWishlist(prev => {
@@ -97,7 +103,7 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   return (
     <StoreContext.Provider value={{
       cart, wishlist, isDarkMode, toggleTheme, addToCart, removeFromCart, updateQuantity,
-      addToWishlist, isInWishlist, clearCart, cartTotal, toastMessage, showToast
+      addToWishlist, isInWishlist, clearCart, cartTotal, discount, setDiscount, toastMessage, showToast
     }}>
       {children}
     </StoreContext.Provider>

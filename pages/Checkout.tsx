@@ -7,7 +7,7 @@ import { CheckoutDetails, Province } from '../types';
 
 const Checkout: React.FC = () => {
   const navigate = useNavigate();
-  const { cart, cartTotal, clearCart } = useStore();
+  const { cart, cartTotal, clearCart, discount } = useStore();
   const [step, setStep] = useState(1);
   const [details, setDetails] = useState<CheckoutDetails>({
     fullName: '',
@@ -18,8 +18,9 @@ const Checkout: React.FC = () => {
     paymentMethod: 'cod',
   });
 
+  const discountedSubtotal = cartTotal - (cartTotal * discount);
   const shipping = cartTotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-  const total = cartTotal + shipping;
+  const total = discountedSubtotal + shipping;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -60,9 +61,9 @@ const Checkout: React.FC = () => {
         {/* Progress */}
         <div className="flex justify-center mb-12">
           <div className="flex items-center">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= 1 ? 'bg-gold-500 text-white' : 'bg-gray-200 text-gray-500'}`}>1</div>
-            <div className={`w-20 h-1 ${step >= 2 ? 'bg-gold-500' : 'bg-gray-200'}`}></div>
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= 2 ? 'bg-gold-500 text-white' : 'bg-gray-200 text-gray-500'}`}>2</div>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 1 ? 'bg-gold-500 text-white' : 'bg-gray-200 text-gray-500'}`}>1</div>
+            <div className={`w-20 h-1 transition-colors ${step >= 2 ? 'bg-gold-500' : 'bg-gray-200'}`}></div>
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors ${step >= 2 ? 'bg-gold-500 text-white' : 'bg-gray-200 text-gray-500'}`}>2</div>
           </div>
         </div>
 
@@ -152,13 +153,30 @@ const Checkout: React.FC = () => {
               </div>
 
               <div className="border-t border-gray-200 dark:border-slate-700 pt-6">
-                <div className="flex justify-between text-xl font-bold dark:text-white mb-6">
-                    <span>Total Amount</span>
-                    <span>Rs. {total.toLocaleString()}</span>
+                <div className="space-y-2 mb-6">
+                    <div className="flex justify-between text-slate-500 text-sm">
+                        <span>Subtotal</span>
+                        <span>Rs. {cartTotal.toLocaleString()}</span>
+                    </div>
+                     {discount > 0 && (
+                        <div className="flex justify-between text-green-500 text-sm">
+                            <span>Discount</span>
+                            <span>- Rs. {(cartTotal * discount).toLocaleString()}</span>
+                        </div>
+                    )}
+                    <div className="flex justify-between text-slate-500 text-sm">
+                        <span>Shipping</span>
+                        <span>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</span>
+                    </div>
+                    <div className="flex justify-between text-xl font-bold dark:text-white pt-2 border-t border-gray-100 dark:border-slate-700">
+                        <span>Total Amount</span>
+                        <span>Rs. {total.toLocaleString()}</span>
+                    </div>
                 </div>
+                
                 <div className="flex gap-4">
-                    <button type="button" onClick={() => setStep(1)} className="flex-1 px-6 py-4 rounded-xl border border-slate-300 text-slate-700 font-bold">Back</button>
-                    <button type="submit" className="flex-1 bg-gold-500 text-white py-4 rounded-xl font-bold hover:bg-gold-600 shadow-lg shadow-gold-500/30">Complete Order</button>
+                    <button type="button" onClick={() => setStep(1)} className="flex-1 px-6 py-4 rounded-xl border border-slate-300 text-slate-700 font-bold hover:bg-gray-50 transition-colors">Back</button>
+                    <button type="submit" className="flex-1 bg-gold-500 text-white py-4 rounded-xl font-bold hover:bg-gold-600 shadow-lg shadow-gold-500/30 transition-colors">Complete Order</button>
                 </div>
               </div>
             </form>

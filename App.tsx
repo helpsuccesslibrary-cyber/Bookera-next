@@ -2,7 +2,6 @@ import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { StoreProvider } from './context/StoreContext';
 import Navbar from './components/Navbar';
-import ChatBot from './components/ChatBot';
 import Toast from './components/Toast';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
@@ -33,7 +32,6 @@ const App: React.FC = () => {
                 <p className="mt-2 font-serif italic text-gold-600">"Knowledge is the new currency."</p>
              </div>
           </footer>
-          <ChatBot />
           <Toast />
         </div>
       </Router>
