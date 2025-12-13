@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Payment from './pages/Payment';
 import OrderConfirmation from './pages/OrderConfirmation';
 import Comparison from './pages/Comparison';
 
@@ -22,6 +23,7 @@ const App: React.FC = () => {
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/payment" element={<Payment />} />
               <Route path="/order-confirmation" element={<OrderConfirmation />} />
               <Route path="/compare" element={<Comparison />} />
             </Routes>

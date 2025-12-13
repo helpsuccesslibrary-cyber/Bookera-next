@@ -33,10 +33,5 @@ export interface Review {
 export type Province = 'KPK';
 
 export interface CheckoutDetails {
-  fullName: string;
-  phone: string;
-  address: string;
-  province: string;
-  city: string;
   paymentMethod: 'cod';
 }
