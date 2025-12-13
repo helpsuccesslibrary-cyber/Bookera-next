@@ -30,7 +30,7 @@ export interface Review {
   date: string;
 }
 
-export type Province = 'Punjab' | 'Sindh' | 'KPK' | 'Balochistan' | 'Islamabad';
+export type Province = 'KPK';
 
 export interface CheckoutDetails {
   fullName: string;
@@ -38,5 +38,5 @@ export interface CheckoutDetails {
   address: string;
   province: string;
   city: string;
-  paymentMethod: 'cod' | 'easypaisa' | 'bank_transfer';
+  paymentMethod: 'cod' | 'easypaisa';
 }

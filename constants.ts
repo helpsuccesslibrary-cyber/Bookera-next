@@ -73,11 +73,40 @@ export const BOOKS: Book[] = [
 ];
 
 export const LOCATIONS: Record<Province, string[]> = {
-  'Islamabad': ['Islamabad'],
-  'Punjab': ['Lahore', 'Faisalabad', 'Rawalpindi', 'Multan', 'Gujranwala'],
-  'Sindh': ['Karachi', 'Hyderabad', 'Sukkur'],
-  'KPK': ['Peshawar', 'Abbottabad', 'Swat'],
-  'Balochistan': ['Quetta', 'Gwadar']
+  'KPK': [
+    'Abbottabad',
+    'Bannu',
+    'Barikot',
+    'Batkhela',
+    'Battagram',
+    'Charsadda',
+    'Chitral',
+    'Dera Ismail Khan (D.I. Khan)',
+    'Dir',
+    'Hangu',
+    'Haripur',
+    'Havelian',
+    'Kabal',
+    'Karak',
+    'Khwazakhela',
+    'Kohat',
+    'Lakki Marwat',
+    'Mansehra',
+    'Mardan',
+    'Mingora',
+    'Nowshera',
+    'Pabbi',
+    'Paharpur',
+    'Peshawar',
+    'Shabqadar',
+    'Swabi',
+    'Takht-i-Bahi',
+    'Tank',
+    'Tangi',
+    'Timargara',
+    'Topi',
+    'Tordher'
+  ]
 };
 
 export const MOCK_REVIEWS: Review[] = [
@@ -86,8 +115,7 @@ export const MOCK_REVIEWS: Review[] = [
 ];
 
 export const PAYMENT_DETAILS = {
-  easypaisa: { title: 'EasyPaisa', number: '0300-1234567', name: 'Bookera Payments' },
-  bank: { title: 'Meezan Bank', account: 'PK00MEZN0000001234567890', name: 'Bookera Pvt Ltd' }
+  easypaisa: { title: 'EasyPaisa', number: '0300-1234567', name: 'Bookera Payments' }
 };
 
 export const SHIPPING_COST = 250;

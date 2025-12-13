@@ -13,8 +13,8 @@ const Checkout: React.FC = () => {
     fullName: '',
     phone: '',
     address: '',
-    province: 'Punjab',
-    city: LOCATIONS['Punjab'][0],
+    province: 'KPK',
+    city: LOCATIONS['KPK'][0],
     paymentMethod: 'cod',
   });
 
@@ -109,8 +109,8 @@ const Checkout: React.FC = () => {
             <form onSubmit={handleFinalSubmit} className="space-y-6">
               <h2 className="text-3xl font-serif font-bold dark:text-white mb-6">Payment Method</h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                {['cod', 'easypaisa', 'bank_transfer'].map((method) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                {['cod', 'easypaisa'].map((method) => (
                   <div 
                     key={method} 
                     onClick={() => setDetails(prev => ({ ...prev, paymentMethod: method as any }))}
@@ -133,19 +133,6 @@ const Checkout: React.FC = () => {
                     <p className="dark:text-slate-300 mb-4">Title: {PAYMENT_DETAILS.easypaisa.name}</p>
                     <label className="flex items-center gap-2 p-3 border border-dashed border-slate-400 rounded-lg cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                       <Upload size={20} /> <span className="text-sm">Upload Screenshot</span>
-                      <input type="file" className="hidden" accept="image/*" />
-                    </label>
-                  </div>
-                )}
-
-                {details.paymentMethod === 'bank_transfer' && (
-                  <div>
-                    <h4 className="font-bold text-lg mb-2 dark:text-white">Bank Transfer</h4>
-                    <p className="dark:text-slate-300">{PAYMENT_DETAILS.bank.title}</p>
-                    <p className="dark:text-slate-300">IBAN: {PAYMENT_DETAILS.bank.account}</p>
-                    <p className="dark:text-slate-300 mb-4">Title: {PAYMENT_DETAILS.bank.name}</p>
-                     <label className="flex items-center gap-2 p-3 border border-dashed border-slate-400 rounded-lg cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                      <Upload size={20} /> <span className="text-sm">Upload Receipt</span>
                       <input type="file" className="hidden" accept="image/*" />
                     </label>
                   </div>
