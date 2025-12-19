@@ -81,16 +81,17 @@ const Checkout: React.FC = () => {
               <h2 className="text-3xl font-serif font-bold dark:text-white mb-6">Shipping Details</h2>
               
               {/* Tally Form Embed */}
-              <div className="w-full">
+              <div className="w-full overflow-hidden">
                 <iframe 
-                  data-tally-src="https://tally.so/r/dWEo9o?transparentBackground=1&dynamicHeight=1" 
+                  data-tally-src="https://tally.so/r/dWEo9o?transparentBackground=1&dynamicHeight=1&hideFooter=1" 
                   width="100%" 
-                  height="1000" 
+                  height="900" 
                   frameBorder="0" 
                   marginHeight={0} 
                   marginWidth={0} 
                   title="Shipping Details"
-                  className="bg-transparent"
+                  className="bg-transparent block"
+                  style={{ marginBottom: '-50px' }}
                 ></iframe>
               </div>
             </div>
